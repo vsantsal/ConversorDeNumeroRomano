@@ -15,7 +15,7 @@ class ConversorDeNumeroRomano(metaclass=abc.ABCMeta):
     })
 
     @classmethod
-    def converte(cls, numero_em_romano: str) -> int:
+    def converte_romano_para_int(cls, numero_em_romano: str) -> int:
         """
         Recebe texto numero_em_romano e retorna sua representação decimal (int).
 
@@ -24,7 +24,7 @@ class ConversorDeNumeroRomano(metaclass=abc.ABCMeta):
         """
         # fail fast se não é string
         try:
-            numero_romano_caixa_alta = numero_em_romano.upper()
+            numero_romano_caixa_alta: str = numero_em_romano.upper()
         except AttributeError:
             raise TypeError("%s deve ter <'class'> = 'str'" % numero_em_romano)
 
@@ -46,16 +46,20 @@ class ConversorDeNumeroRomano(metaclass=abc.ABCMeta):
         cls._valida_se_nao_possui_tres_digitos_menores_ou_mais_a_esquerda_do_maior(valores)
 
         # aplica regra para somar os valores decimais representados pela sequência simbólica
-        numero_em_decimal = cls._soma_sequencia_invertida_simbolos_romanos(valores)
+        numero_em_decimal: int = cls._soma_sequencia_invertida_simbolos_romanos(valores)
 
         return numero_em_decimal
+
+    @classmethod
+    def converte_int_para_romano(cls, numero_int: int) -> str:
+        raise NotImplementedError("WIP")
 
     @staticmethod
     def _soma_sequencia_invertida_simbolos_romanos(sequencia_numeros: List) -> int:
         # acumulador condicional:
         # algarismos de menor ou igual valor à direita são somados ao algarismo de maior valor
         # algarismos de menor valor à esquerda são subtraídos do algarismo de maior valor
-        valores_com_sinais = [
+        valores_com_sinais: List = [
             valor
             if ((not posicao) or valor >= sequencia_numeros[posicao - 1])
             else -valor
@@ -84,8 +88,9 @@ class ConversorDeNumeroRomano(metaclass=abc.ABCMeta):
             if valor < ultimo_valor:
                 num_valores_menores += 1
                 if num_valores_menores > 2:
-                    raise ValueError
+                    raise ValueError('Símbolo inválido!')
             else:
+                num_valores_menores = 0
                 ultimo_valor = valor
 
     @staticmethod
