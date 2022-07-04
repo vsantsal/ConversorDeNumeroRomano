@@ -28,7 +28,7 @@ class TestConversorDeNumeroRomano(unittest.TestCase):
         }
         self.simbolos_combinacoes_nao_permitidas = {
             'VV', 'IIII', 'LL', 'DD', 'IIIX',
-            'XXXC', 'MMMM'
+            'XXXC', 'MMMM', 'XCXL'
         }
         self.nome_arquivo_numeros_1_a_3999: str = 'numeros_1_a_3999.txt'
         self.numero = ConversorDeNumeroRomano.converte_romano_para_int
