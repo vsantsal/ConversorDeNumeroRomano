@@ -28,7 +28,7 @@ class TestConversorDeNumeroRomano(unittest.TestCase):
         }
         self.simbolos_combinacoes_nao_permitidas = {
             'VV', 'IIII', 'LL', 'DD', 'IIIX',
-            'XXXC', 'MMMM', 'XCXL'
+            'XXXC', 'MMMM'
         }
         self.nome_arquivo_numeros_1_a_3999: str = 'numeros_1_a_3999.txt'
         self.numero = ConversorDeNumeroRomano.converte_romano_para_int
@@ -72,7 +72,7 @@ class TestConversorDeNumeroRomano(unittest.TestCase):
 
     def test_converte_para_int_nao_deve_entender_simbolos_combinacoes_nao_permitidas_e_lancar_value_error(self):
         for simbolo in self.simbolos_combinacoes_nao_permitidas:
-            with self.assertRaises(ValueError) as erro:
+            with self.assertRaises(ValueError):
                 self.numero(simbolo)
 
     def test_converte_para_int_funciona_para_numeros_de_1_a_3999(self):
